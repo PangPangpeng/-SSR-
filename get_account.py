@@ -2,7 +2,7 @@
 """
 Created on Sat Jan 13 11:13:35 2018
 
-@author: PangpangPeng
+@author: pangpangpeng
 """
 
 #自动获取github上面的ssr账号和密码
@@ -28,7 +28,7 @@ def get_message_picture_url():
     reg='(?<=img src=").*?(?=")'
     imgre = re.compile(reg)
     imglist=re.findall(imgre,html)
-    return imglist[len(imglist)-1]
+    return imglist
 #此函数获得百度OCR的access_token
 def get_access_token(client_id,client_secret):
     host = 'https://aip.baidubce.com/oauth/2.0/token?grant_type=client_credentials&client_id='
@@ -176,15 +176,19 @@ def write_config(list_servers):
     f.close()
     
 if __name__ == "__main__":
-    get_message_picture=urllib2.urlopen(get_message_picture_url())
-    print "get picture done!"
-    pic=get_message_picture.read()
-    pic_encoded=base64.b64encode(pic)
-    Access_Token=get_access_token(client_id,client_secret)
-    print "start recognize!"
-    get_word=send_Pic2word_request(pic_encoded,Access_Token)
-    print "recogenize done!"
-    list_servers=words_parse_head(get_word)
+    #get_message_picture=urllib2.urlopen(get_message_picture_url())
+    list_servers=[]
+    img_url_list=get_message_picture_url()
+    for i in range(0,len(img_url_list)):
+        if img_url_list[i].find("Alvin9999")>=0:
+            get_message_picture=urllib2.urlopen(img_url_list[i])
+            pic=get_message_picture.read()
+            pic_encoded=base64.b64encode(pic)
+            Access_Token=get_access_token(client_id,client_secret)
+            print "start recognize!"
+            get_word=send_Pic2word_request(pic_encoded,Access_Token)
+            print "recogenize done!"
+            list_servers.extend(words_parse_head(get_word))
     print "start config!"
     write_config(list_servers)
     print "config done!"
