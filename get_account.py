@@ -2,7 +2,7 @@
 """
 Created on Sat Jan 13 11:13:35 2018
 
-@author: zhukw
+@author: PangpangPeng
 """
 
 #自动获取github上面的ssr账号和密码
