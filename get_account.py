@@ -15,8 +15,8 @@ import base64
 import re
 #此处填写自己百度ocr的APPid
 #百度ocr：http://ai.baidu.com/tech/ocr/general
-client_id="jOVWVXfp4NUdRLvNFuv32ihB"
-client_secret="EiGIs95WGU5aEdkfx4fwKOz0GODoGGdp"
+client_id=""
+client_secret=""
 
 #此函数用来获取github上面写着地址的图片
 def get_message_picture_url():
